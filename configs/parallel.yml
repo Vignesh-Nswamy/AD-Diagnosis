@@ -1,0 +1,29 @@
+# Configuration parameters for parallel model
+
+# Options: 'conv_3d', 'parallel' or 'mixed'
+model_arch: 'parallel'
+
+input:
+    shape: (62, 96, 96, 1)
+    type: 'single'
+
+training:
+  batch_size: 32
+  # Options: 'rmsprop', 'sgd' or 'adam'
+  optimizer: 'adam'
+
+learning:
+    #learning rate
+    rate: 1e-5
+    # learning rate decay factor
+    decay: 0.5
+    # Patience in epochs to decay learning rate
+    decay_patience: 4
+
+checkpoint_dir: '/checkpoints/parallel'
+weights_dir: '/weights/parallel'
+
+data_paths:
+    train: 'data/train.tfrecords'
+    validation: 'data/val.tfrecords'
+    test: 'data/test.tfrecords'
