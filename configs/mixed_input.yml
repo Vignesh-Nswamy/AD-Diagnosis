@@ -4,28 +4,28 @@
 model_arch: 'mixed'
 
 input:
-  image_input_shape: (62, 96, 96, 1)
-  num_input_shape: (2,)
-  # Options: 'single' or 'mixed'
-  type: 'mixed'
+    image_input_shape: (62, 96, 96, 1)
+    num_input_shape: (2,)
+    # Options: 'single' or 'mixed'
+    type: 'mixed'
 
 training:
-  batch_size: 32
-  # Options: 'rmsprop', 'sgd' or 'adam'
-  optimizer: 'adam'
+    batch_size: 32
+    # Options: 'rmsprop', 'sgd' or 'adam'
+    optimizer: 'adam'
 
 learning:
-  #learning rate
-  rate: 1e-5
-  # learning rate decay factor
-  decay: 0.5
-  # Patience in epochs to decay learning rate
-  decay_patience: 4
+    #learning rate
+    rate: 1e-5
+    # learning rate decay factor
+    decay: 0.5
+    # Patience in epochs to decay learning rate
+    decay_patience: 4
 
 checkpoint_dir: '/checkpoints/mixed_input'
 weights_dir: '/weights/mixed_input'
 
 data_paths:
-  train: 'data/train.tfrecords'
-  validation: 'data/val.tfrecords'
-  test: 'data/test.tfrecords'
+    train: 'data/train.tfrecords'
+    validation: 'data/val.tfrecords'
+    test: 'data/test.tfrecords'

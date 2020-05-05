@@ -4,27 +4,27 @@
 model_arch: 'conv_3d'
 
 input:
-  shape: (62, 96, 96, 1)
-  # Options: 'single' or 'mixed'
-  type: 'single'
+    shape: (62, 96, 96, 1)
+    # Options: 'single' or 'mixed'
+    type: 'single'
 
 training:
-  batch_size: 32
-  # Options: 'rmsprop', 'sgd' or 'adam'
-  optimizer: 'adam'
+    batch_size: 32
+    # Options: 'rmsprop', 'sgd' or 'adam'
+    optimizer: 'adam'
 
 learning:
-  #learning rate
-  rate: 1e-5
-  # learning rate decay factor
-  decay: 0.4
-  # Patience in epochs to decay learning rate
-  decay_patience: 4
+    #learning rate
+    rate: 1e-5
+    # learning rate decay factor
+    decay: 0.4
+    # Patience in epochs to decay learning rate
+    decay_patience: 4
 
 checkpoint_dir: '/checkpoints/conv_3d'
 weights_dir: '/weights/conv_3d'
 
 data_paths:
-  train: 'data/train.tfrecords'
-  validation: 'data/val.tfrecords'
-  test: 'data/test.tfrecords'
+    train: 'data/train.tfrecords'
+    validation: 'data/val.tfrecords'
+    test: 'data/test.tfrecords'
