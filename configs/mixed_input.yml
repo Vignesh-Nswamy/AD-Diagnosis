@@ -22,8 +22,8 @@ learning:
     # Patience in epochs to decay learning rate
     decay_patience: 4
 
-checkpoint_dir: '/checkpoints/mixed_input'
-weights_dir: '/weights/mixed_input'
+checkpoint_dir: 'saved_models/mixed_input/checkpoints'
+weights_dir: 'saved_models/mixed_input/weights'
 
 data_paths:
     train: 'data/train.tfrecords'

@@ -11,24 +11,9 @@ def convert(yaml_dict):
     return yaml_dict
 
 
-# def deep_merge_dict(dict_x, dict_y, path=None):
-#     """Recursively merges dict_y into dict_x."""
-#     if path == None: path = []
-#     for key in dict_y:
-#         if key in dict_x:
-#             if isinstance(dict_x[key], dict) and isinstance(dict_y[key], dict):
-#                 deep_merge_dict(dict_x[key], dict_y[key], path + [str(key)])
-#             elif dict_x[key] == dict_y[key]:
-#                 pass  # same leaf value
-#             else:
-#                 dict_x[key] = dict_y[key]
-#         else:
-#             dict_x[key] = dict_y[key]
-#     return dict_x
-
-
 def merge(config: dict,
           flags):
     for key in flags:
         config[key] = flags[key].value
     return convert(config)
+

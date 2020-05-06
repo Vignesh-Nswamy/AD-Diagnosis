@@ -1,14 +1,13 @@
 import os
-import numpy as np
 
 import tensorflow as tf
-from tensorflow.keras.models import load_model
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.optimizers import RMSprop
 from tensorflow.keras.optimizers import SGD
 
 from utils import decoder
-from utils import eval_stats
+from utils.model_utils import load_model
+from utils.model_utils import evaluate
 
 
 class BaseModel:
@@ -83,7 +82,7 @@ class BaseModel:
     def __init_model(self):
         if os.path.exists(os.path.join(self._checkpoint_dir, 'checkpoint.ckpt')):
             print(f'Found model at {os.path.join(self._checkpoint_dir, "checkpoint.ckpt")}. Loading...')
-            self.model = load_model(os.path.exists(self._checkpoint_dir, 'checkpoint.ckpt'))
+            self.model = load_model(os.path.join(self._checkpoint_dir, 'checkpoint.ckpt'))
         else:
             print(f'No model found at {os.path.join(self._checkpoint_dir, "checkpoint.ckpt")}. Creating...')
             self.model = self.create()
@@ -106,14 +105,4 @@ class BaseModel:
     def evaluate(self):
         test_dataset = tf.data.TFRecordDataset(self.config.data_paths.test,
                                                compression_type='GZIP').map(self.data_decoder).batch(1)
-        predictions = list()
-        true_classes = list()
-        for input_data, label in test_dataset:
-            inp = [input_data['image_input'].numpy(), input_data['num_input'].numpy()] if self.config.input.type == 'mixed' \
-                else input_data.numpy()
-            predicted_label = np.argmax(self.model.predict(inp))
-            predictions.append(predicted_label)
-            true_label = np.argmax(label.numpy())
-            true_classes.append(true_label)
-
-        return eval_stats.get_stats(true_classes, predictions)
+        return evaluate(self.model, test_dataset, self.config.input.type)
