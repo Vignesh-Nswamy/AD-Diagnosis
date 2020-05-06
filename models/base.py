@@ -1,5 +1,8 @@
 import os
 
+from abc import ABCMeta
+from abc import abstractmethod
+
 import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.optimizers import RMSprop
@@ -11,6 +14,8 @@ from utils.model_utils import evaluate
 
 
 class BaseModel:
+    __metaclass__ = ABCMeta
+
     def __init__(self,
                  config):
         self.config = config
@@ -21,11 +26,16 @@ class BaseModel:
 
         # Learning parameters
         self._lr = eval(config.learning.rate)
-        self._decay_factor = eval(config.learning.decay)
-        self._decay_patience = eval(config.learning.decay_patience)
+        self._decay_factor = config.learning.decay
+        self._decay_patience = config.learning.decay_patience
         self._optimizer = RMSprop(self._lr) if config.training.optimizer == 'rmsprop' \
             else SGD(self._lr) if config.training.optimizer == 'sgd' \
             else Adam(self._lr)
+
+        # Default params
+        self._kernel_regularizer = tf.keras.regularizers.l2(0.001)
+        self._he_normal_initializer = tf.keras.initializers.he_normal(seed=0)
+        self._lecun_normal_initializer = tf.keras.initializers.lecun_normal(seed=0)
 
         # Pretraining operations
         self.__create_dirs()
@@ -33,11 +43,6 @@ class BaseModel:
 
         # Create model
         self.__init_model()
-
-        # default params
-        self._kernel_regularizer = tf.keras.regularizers.l2(0.001)
-        self._he_normal_initializer = tf.keras.initializers.he_normal(seed=0)
-        self._lecun_normal_initializer = tf.keras.initializers.lecun_normal(seed=0)
 
         #data decoder
         self.data_decoder = decoder.mixed_input_decoder if self.config.input.type == 'mixed' \
@@ -88,6 +93,7 @@ class BaseModel:
             self.model = self.create()
         print(self.model.summary())
 
+    @abstractmethod
     def create(self):
         pass
 

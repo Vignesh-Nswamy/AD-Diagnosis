@@ -1,5 +1,4 @@
 from tensorflow.keras.models import load_model
-import tqdm
 import numpy as np
 from utils.eval_stats import get_stats
 
