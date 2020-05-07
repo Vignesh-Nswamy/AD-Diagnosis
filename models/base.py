@@ -79,7 +79,7 @@ class BaseModel:
         if self.config.early_stopping:
             callback_list.append(tf.keras.callbacks.EarlyStopping(monitor='val_categorical_accuracy',
                                                                   min_delta=1e-3,
-                                                                  patience=7,
+                                                                  patience=10,
                                                                   verbose=1,
                                                                   mode='max'))
         return callback_list

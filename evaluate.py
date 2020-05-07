@@ -19,9 +19,9 @@ def main(_):
         else decoder.single_input_decoder
     test_dataset = tf.data.TFRecordDataset(config.data_paths.test,
                                            compression_type='GZIP').map(data_decoder).batch(1)
-    model_stats = evaluate(load_checkpoint(os.path.join(config.checkpoint_dir, 'checkpoint.ckpt')),
-                           test_dataset,
-                           config.input.type)
+    evaluate(load_checkpoint(os.path.join(config.checkpoint_dir, 'checkpoint.ckpt')),
+             test_dataset,
+             config.input.type)
 
 
 if __name__ == '__main__':

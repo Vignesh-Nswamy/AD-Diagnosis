@@ -22,7 +22,7 @@ class MixedInput(BaseModel):
         image_input = Input(shape=eval(self.config.input.image_input_shape),
                             name='image_input')
         # First conv layer
-        conv_1 = Conv3D(filters=8,
+        conv_1 = Conv3D(filters=32,
                         kernel_size=3,
                         dilation_rate=1,
                         strides=2,
@@ -32,7 +32,7 @@ class MixedInput(BaseModel):
                         name='conv_1')(image_input)
         batch_norm_1 = batch_norm_1 = BatchNormalization(name='batch_norm_1')(conv_1)
         # Second conv layer
-        conv_2 = Conv3D(filters=8,
+        conv_2 = Conv3D(filters=16,
                         kernel_size=3,
                         dilation_rate=1,
                         strides=2,
