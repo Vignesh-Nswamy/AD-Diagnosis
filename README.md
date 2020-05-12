@@ -40,4 +40,5 @@ python evaluate.py --config_path=configs/conv_3d.yml
 ```
 
 ## Other related projects
-Dataset obtained from Alzheimer's Disease Neuroimaging Initiative. Checkout these other related projects - https://github.com/jbrown81/ADNI_kaggle and https://github.com/regnerus/keras-alzheimers-3d-conv
+Dataset obtained from Alzheimer's Disease Neuroimaging Initiative - http://adni.loni.usc.edu/ <br>
+Checkout these other related projects - https://github.com/jbrown81/ADNI_kaggle and https://github.com/regnerus/keras-alzheimers-3d-conv
