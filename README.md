@@ -15,6 +15,7 @@ Reads image data from .npy and demographics data from .csv file and creates a TF
 npy_path=path/to/npy_files
 records_path=path/to/output_dir
 meta_path=path/to/demographics.csv
+
 ```
 ```bash
 python make_tfrecords.py --numpy_data_path=$npy_path \
